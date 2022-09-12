@@ -2,7 +2,7 @@
 
 #----------------------------------------------------------------------------------
 
-2022/09/12 Some issues are resolveed, please download the latest code. If you have any question please be free to mail to me.
+2022/09/12 Some issues are resolveed, please download the latest code. If you have any question please be free to mail to me via: kunlei@my.swjtu.edu.cn.
 
 #----------------------------------------------------------------------------------
 
