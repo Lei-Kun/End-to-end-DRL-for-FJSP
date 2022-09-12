@@ -170,7 +170,7 @@ class Job_Actor(nn.Module):
                                                                                      batch_node.size(2))).squeeze(1)
             action_node = torch.gather(batch_x, 1,
                                        action1.unsqueeze(-1).unsqueeze(-1).expand(batch_x.size(0), -1,
-                                                                                  batch_x.size(2))).squeeze(0)  # [:,:-2]
+                                                                                  batch_x.size(2))).squeeze(1)  # [:,:-2]
 
             return action,index, log_a, action_node.detach(), action_feature.detach(), mask_mch_action.detach(), h_pooled.detach()
 
@@ -213,7 +213,7 @@ class Job_Actor(nn.Module):
                                                                                      batch_node.size(2))).squeeze(1)
             action_node = torch.gather(batch_x, 1,
                                        action1.unsqueeze(-1).unsqueeze(-1).expand(batch_x.size(0), -1,
-                                                                                  batch_x.size(2))).squeeze(0)  # [:,:-2]
+                                                                                  batch_x.size(2))).squeeze(1)  # [:,:-2]
             v = self.critic(h_pooled)
 
             return entropy, v, log_a, action_node.detach(), action_feature.detach(), mask_mch_action.detach(), h_pooled.detach()
