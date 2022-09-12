@@ -30,6 +30,7 @@ The disjunctive graphprovides a complete view of the scheduling states containin
 # Deep reinforcement learning algorithm 
 To cope with this kind of multi-action reinforcement problem, we proposed a multi-Proximal Policy Optimization (multi-PPO) algorithm that takes a multiple actor-critic architecture and adopts PPO as its policy optimization method for learning the two sub-policies. The PPO algorithm is a state-of-the-art policy gradient approach with an actor-critic style, which is widely used to deal with both discrete and continuous control tasks . However, the PPO algorithm cannot be directly used to handle a multi-action task since it generally contains one actor to learn one policy that can only control a single action at each timestep. By contrast, the proposed multi-PPO architecture includes two actor networks (job operation and machine encoder-decoders as the two actor networks, respectively).
  
-
+#Cite us
+For open access source, please cite the work correctly!!!
 
 
