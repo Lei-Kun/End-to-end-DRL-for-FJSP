@@ -1,4 +1,8 @@
 # End-to-end-DRL-for-FJSP
+
+#----------------------------------------------------------------------------------
+2022/09/12 Some issues are resolveed, please download the latest code. If you have any question please be free to mail to me.
+#----------------------------------------------------------------------------------
 This is the code for our published paper: 'A Multi-action Deep Reinforcement Learning Framework for Flexible Job-shop Scheduling Problem'; Everyone is welcome to use this code and cite our paper:
 
 {Kun Lei, Peng Guo, Wenchao Zhao, Yi Wang, Linmao Qian, Xiangyin Meng, Liansheng Tang,
