@@ -6,6 +6,8 @@
 
 You can download the "FJSP_MultiPPO" project to run 'PPOwithValue' file to train the policies, run the 'validation' file to test/validate on random generated instances.
 
+You can download the other project named 'FJSP-benchmarks' in my github account to test the trained model on real-world instances. 
+
 #----------------------------------------------------------------------------------
 
 2022/09/12 Some issues are resolveed, please download the latest code. If you have any question please feel free to mail to me via: kunlei@my.swjtu.edu.cn.
@@ -28,7 +30,7 @@ This work can be extend to solve other type of scheduling problems which can be 
 
 The proposed multi-PPO algorithm can be extend to solve other multi-action decision needed combinatorial optimization problem.
 
-You can download the other project named 'FJSP-benchmarks' in my github account to test the trained model on real-world instances. 
+
 # Running the code
 You can run the 'PPOwithValue' file to train the policies, run the 'validation' file to test/validate on random generated instances.
 
