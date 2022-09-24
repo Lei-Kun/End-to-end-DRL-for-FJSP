@@ -1,5 +1,7 @@
 # End-to-end-DRL-for-FJSP
 
+#---------------------------------------------------------------------------------
+2022/09/24 I've uploaded the FJSP_realworld files, you can download it to run the 'validation_realWorld.py' to test on bechmark instances. In particular, you can download more bechmark instances and saved models to test, and in this project I only upload one saved model and benchmark. 
 #----------------------------------------------------------------------------------
 
 2022/09/12 Some issues are resolveed, please download the latest code. If you have any question please feel free to mail to me via: kunlei@my.swjtu.edu.cn.
@@ -24,7 +26,7 @@ The proposed multi-PPO algorithm can be extend to solve other multi-action decis
 
 You can download the other project named 'FJSP-benchmarks' in my github account to test the trained model on real-world instances. 
 # Running the code
-You can run the 'PPOwithValue' file to train the policies, run the 'validation' file to test/validate on random generated instances, and run the 'validation_realWorld.py' to test on bechmark instances.
+You can run the 'PPOwithValue' file to train the policies, run the 'validation' file to test/validate on random generated instances.
 
 # Motivation 
 Most traditional methods, including exact methods based on mathematical programming and metaheuristics, cannot apply to large FJSP instances or real-time FJSP instances due to their time complexity. Some researchers have used DRL to solve combinatorial optimization problems and achieved good results, but FJSP has received less attention. Some DRL-based methods in solving FJSP are designed to select composite dispatching rules instead of directly finding scheduling solutions, whose performance depends on the design of dispatching rules. To the best of our knowledge, there is no research to solve the FJSP via multiple action end-to-end DRL framework without predetermined dispatching rules. 
