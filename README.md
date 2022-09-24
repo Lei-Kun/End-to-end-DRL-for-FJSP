@@ -1,6 +1,7 @@
 # End-to-end-DRL-for-FJSP
 
-#---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+
 2022/09/24 I've uploaded the FJSP_realworld files, you can download it to run the 'validation_realWorld.py' to test on bechmark instances. In particular, you can download more bechmark instances and saved models to test, and in this project I only upload one saved model and benchmark. 
 #----------------------------------------------------------------------------------
 
