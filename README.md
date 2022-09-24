@@ -8,6 +8,8 @@ You can download the "FJSP_MultiPPO" project to run 'PPOwithValue' file to train
 
 You can download the other project named 'FJSP-benchmarks' in my github account to test the trained model on real-world instances. 
 
+Anyway, is there a bigger headache than tidying up code? For open access source, please cite the work correctly if it is helpful to you!!!
+
 #----------------------------------------------------------------------------------
 
 2022/09/12 Some issues are resolveed, please download the latest code. If you have any question please feel free to mail to me via: kunlei@my.swjtu.edu.cn.
