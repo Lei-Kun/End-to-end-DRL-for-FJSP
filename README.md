@@ -3,6 +3,9 @@
 #---------------------------------------------------------------------------------
 
 2022/09/24 I've uploaded the FJSP_realworld files, you can download it to run the 'validation_realWorld.py' to test on bechmark instances. In particular, you can download more bechmark instances and saved models to test, and in this project I only upload one saved model and benchmark. 
+
+You can download the "FJSP_MultiPPO" project to run 'PPOwithValue' file to train the policies, run the 'validation' file to test/validate on random generated instances.
+
 #----------------------------------------------------------------------------------
 
 2022/09/12 Some issues are resolveed, please download the latest code. If you have any question please feel free to mail to me via: kunlei@my.swjtu.edu.cn.
