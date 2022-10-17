@@ -12,17 +12,17 @@ def min_mch_job(mch_time,mchsEndTimes,number_of_machines,dur,temp,omega):
             mch_time[j] = machine[np.where(machine >= 0)][-1]
     while True:
 
-        # 返回最先完成加工的机器
+
         min_mch_time = np.where(mch_time == mch_time.min())[0]
         #dur(job,op,machine)->(machine,number_of_tasks)
-        min_mchForJob = []#闲置机器能加工的task
+        min_mchForJob = []
         dur = np.copy(dur)
         dur = dur.reshape(-1,number_of_machines).T
         for z in min_mch_time:
             mch_for_job = np.where(dur[z] > 0)[0]
             min_mchForJob.append(mch_for_job)
 
-        #闲置机器在该时刻可以选择的task
+
         min_mchFortask = []
         for z in range(len(min_mch_time)):
 
@@ -43,9 +43,9 @@ def min_mch_job(mch_time,mchsEndTimes,number_of_machines,dur,temp,omega):
             job_time[j] = 0
         else:
             job_time[j] = job[np.where(job != 0)][-1]
-    #计算闲置机器在该时刻可以选择的task的完工时间
+
     task_time = []
-    #每个闲置机器可选择加工的task集合
+
     mchForActionSpace = []
     for z in range(len(min_mch_time)):
         min = np.array(min_mchFortask[z])
@@ -78,7 +78,7 @@ def min_job_mch(mch_time,job_time, mchsEndTimes, number_of_machines, dur, temp, 
 
     while True:
         mask = np.full(shape=(temp.shape[0]), fill_value=1, dtype=bool)
-        # 返回最先完成加工的工件
+
         min_job_time = np.where(job_time1 <= job_time.min())[0]
         min_task = omega[min_job_time]
 
@@ -89,7 +89,7 @@ def min_job_mch(mch_time,job_time, mchsEndTimes, number_of_machines, dur, temp, 
             mch_for_job = np.where(dur[row, col] > 0)[0]
             mchFor_minTask.append(mch_for_job)
 
-            # 计算加工该task的机器
+
         minMch_For_minTask = []
         mch_mask = []
         m_masks = np.copy(mask_mch)
@@ -142,7 +142,7 @@ def min_job_mch1(mch_time, mchsEndTimes, number_of_machines, dur, temp, first_co
     while True:
         mask = np.full(shape=(temp.shape[0]), fill_value=1, dtype=bool)
 
-        # 返回最先完成加工的工件
+
         min_job_time = np.where(job_time1 <= job_time_mean)[0]
 
         min_task = first_col[min_job_time]
@@ -155,7 +155,7 @@ def min_job_mch1(mch_time, mchsEndTimes, number_of_machines, dur, temp, first_co
             mch_for_job = np.where(dur[z] > 0)[0]
             mchFor_minTask.append(mch_for_job)
 
-            # 计算加工该task的机器
+
         minMch_For_minTask = []
         mch_mask = []
         for i in range(len(min_task)):
