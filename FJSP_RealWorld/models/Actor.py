@@ -5,9 +5,10 @@ import torch.nn.functional as F
 from models.graphcnn_congForSJSSP import GraphCNN
 from torch.distributions.categorical import Categorical
 import torch
-from Mhattention import ProbAttention
+from Params import configs
 from agent_utils import select_action1,greedy_select_action,select_action2
 from models.Pointer import Pointer
+INIT = False
 class Attention(nn.Module):
     def __init__(self, hidden_size):
         super(Attention, self).__init__()
@@ -72,13 +73,13 @@ class Job_Actor(nn.Module):
         #self.fc = nn.Linear(hidden_dim * 2, hidden_dim, bias=False).to(device)
         #self.fc1 = nn.Linear(hidden_dim, hidden_dim, bias=False).to(device)
         #self.fc2 = nn.Linear(1, hidden_dim, bias=False).to(device)
-        self.feature_extract = GraphCNN(num_layers=num_layers,
+        '''self.feature_extract = GraphCNN(num_layers=num_layers,
                                         num_mlp_layers=num_mlp_layers_feature_extract,
                                         input_dim=input_dim,
                                         hidden_dim=hidden_dim,
                                         learn_eps=learn_eps,
                                         neighbor_pooling_type=neighbor_pooling_type,
-                                        device=device).to(device)
+                                        device=device).to(device)'''
         self.encoder = Encoder(num_layers=num_layers,
                                num_mlp_layers=num_mlp_layers_feature_extract,
                                input_dim=input_dim,
@@ -96,6 +97,13 @@ class Job_Actor(nn.Module):
         #self.actor = MLPActor(num_mlp_layers_actor, hidden_dim*2, hidden_dim_actor, 1).to(device)
 
         self.critic = MLPCritic(num_mlp_layers_critic, hidden_dim, hidden_dim_critic, 1).to(device)
+        if INIT:
+            for name, p in self.named_parameters():
+                if 'weight' in name:
+                    if len(p.size()) >= 2:
+                        nn.init.orthogonal_(p, gain=1)
+                elif 'bias' in name:
+                    nn.init.constant_(p, 0)
 
     def forward(self,
                 x,
@@ -232,9 +240,18 @@ class Mch_Actor(nn.Module):
 
         self.fc2 = nn.Linear(2, hidden_dim, bias=False).to(device)
         self.actor = MLPActor(3, hidden_dim * 3, hidden_dim, 1).to(device)
-
-        self.critic = MLPCritic(3, hidden_dim*2, hidden_dim, 1).to(device)
+        if INIT:
+            for name, p in self.named_parameters():
+                if 'weight' in name:
+                    if len(p.size()) >= 2:
+                        nn.init.orthogonal_(p, gain=1)
+                elif 'bias' in name:
+                    nn.init.constant_(p, 0)
+        #self.critic = MLPCritic(3, hidden_dim*2, hidden_dim, 1).to(device)
     def forward(self,action_node,hx,mask_mch_action,mch_time,mch_a=None,last_hh=None,policy=False):
+        mch_time = mch_time/configs.et_normalize_coef
+        action_node = action_node/configs.et_normalize_coef
+
 
         feature = torch.cat([mch_time.unsqueeze(-1), action_node.unsqueeze(-1)], -1)
         action_node = self.bn(self.fc2(feature).reshape(-1, self.hidden_size)).reshape(-1,self.n_m,self.hidden_size)
@@ -250,13 +267,13 @@ class Mch_Actor(nn.Module):
         # mask_reshape = mask_mch_action.reshape(candidate_scores.size())
         mch_scores = mch_scores.masked_fill(mask_mch_action.squeeze(1).bool(), float("-inf"))
         pi_mch = F.softmax(mch_scores, dim=1)
-        if policy:
+        '''if policy:
             pools = torch.cat([pool,hx],-1)
             v = self.critic(pools)
         else:
-            v = 0
+            v = 0'''
 
-        return pi_mch,v,pool
+        return pi_mch,0,pool
 
 
 
