@@ -71,13 +71,16 @@ class Job_Actor(nn.Module):
         self.n_m = n_m
         self.n_ops_perjob = n_m
         self.device = device
-        self.feature_extract = GraphCNN(num_layers=num_layers,
+        #self.fc = nn.Linear(hidden_dim * 2, hidden_dim, bias=False).to(device)
+        #self.fc1 = nn.Linear(hidden_dim, hidden_dim, bias=False).to(device)
+        #self.fc2 = nn.Linear(1, hidden_dim, bias=False).to(device)
+        '''self.feature_extract = GraphCNN(num_layers=num_layers,
                                         num_mlp_layers=num_mlp_layers_feature_extract,
                                         input_dim=input_dim,
                                         hidden_dim=hidden_dim,
                                         learn_eps=learn_eps,
                                         neighbor_pooling_type=neighbor_pooling_type,
-                                        device=device).to(device)
+                                        device=device).to(device)'''
         self.encoder = Encoder(num_layers=num_layers,
                                num_mlp_layers=num_mlp_layers_feature_extract,
                                input_dim=input_dim,
@@ -87,8 +90,12 @@ class Job_Actor(nn.Module):
                                device=device).to(device)
         self._input = nn.Parameter(torch.Tensor(hidden_dim))
         self._input.data.uniform_(-1, 1).to(device)
+        #self.actor = ProbAttention(8,hidden_dim,hidden_dim).to(device)
+        self.actor1 = MLPActor(3, hidden_dim * 3, hidden_dim, 1).to(device)
 
-        self.actor1 = MLPActor(configs.num_mlp_layers_actor, hidden_dim * 3, configs.hidden_dim_actor, 1).to(device)
+        #self.MCH_actor = ProbAttention(8, hidden_dim, hidden_dim).to(device)
+        #self.attn = Attention(hidden_dim).to(device)
+        #self.actor = MLPActor(num_mlp_layers_actor, hidden_dim*2, hidden_dim_actor, 1).to(device)
 
         self.critic = MLPCritic(num_mlp_layers_critic, hidden_dim, hidden_dim_critic, 1).to(device)
         if INIT:
@@ -163,7 +170,7 @@ class Job_Actor(nn.Module):
                                                                                      batch_node.size(2))).squeeze(1)
             action_node = torch.gather(batch_x, 1,
                                        action1.unsqueeze(-1).unsqueeze(-1).expand(batch_x.size(0), -1,
-                                                                                  batch_x.size(2))).squeeze()  # [:,:-2]
+                                                                                  batch_x.size(2))).squeeze(1)  # [:,:-2]
 
             return action,index, log_a, action_node.detach(), action_feature.detach(), mask_mch_action.detach(), h_pooled.detach()
 
@@ -206,7 +213,7 @@ class Job_Actor(nn.Module):
                                                                                      batch_node.size(2))).squeeze(1)
             action_node = torch.gather(batch_x, 1,
                                        action1.unsqueeze(-1).unsqueeze(-1).expand(batch_x.size(0), -1,
-                                                                                  batch_x.size(2))).squeeze()  # [:,:-2]
+                                                                                  batch_x.size(2))).squeeze(1)  # [:,:-2]
             v = self.critic(h_pooled)
 
             return entropy, v, log_a, action_node.detach(), action_feature.detach(), mask_mch_action.detach(), h_pooled.detach()
@@ -233,7 +240,7 @@ class Mch_Actor(nn.Module):
         self.device = device
 
         self.fc2 = nn.Linear(2, hidden_dim, bias=False).to(device)
-        self.actor = MLPActor(configs.num_mlp_layers_actor, hidden_dim * 3, configs.hidden_dim_actor, 1).to(device)
+        self.actor = MLPActor(3, hidden_dim * 3, hidden_dim, 1).to(device)
         if INIT:
             for name, p in self.named_parameters():
                 if 'weight' in name:
