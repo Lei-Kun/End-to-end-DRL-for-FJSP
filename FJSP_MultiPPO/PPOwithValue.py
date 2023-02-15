@@ -242,14 +242,14 @@ class PPO:
                 job_v_loss = self.MSE(val[j], rewards_all_env[j])
                 job_loss = -1*torch.min(job_surr1, job_surr2) + 0.5*job_v_loss - 0.01 * job_entropy[j]
                 job_loss_sum += job_loss
-                job_v_loss_sum += job_v_loss
+
 
                 mch_surr1 = mch_ratios * advantages
                 mch_surr2 = torch.clamp(mch_ratios, 1 - self.eps_clip, 1 + self.eps_clip) * advantages
                 #mch_v_loss = self.MSE(val[j], rewards_all_env[j])
-                mch_loss = -1*torch.min(mch_surr1, mch_surr2) - 0.01 * mch_entropies[j] + 0.5*job_v_loss
+                mch_loss = -1*torch.min(mch_surr1, mch_surr2) - 0.01 * mch_entropies[j]
                 mch_loss_sum += mch_loss
-                mch_v_loss_sum += job_v_loss
+
 
             # take gradient step
             # loss_sum = torch.stack(loss_sum,0)
