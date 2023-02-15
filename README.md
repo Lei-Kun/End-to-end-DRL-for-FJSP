@@ -2,6 +2,8 @@
 
 #---------------------------------------------------------------------------------
 
+2023/02/15 I've revised the 'PPOwithValue.py' so that it's suitable for a higher version of Pytorch. 
+
 2022/11/03 torch == 1.4.0
 
 2022/09/24 I've uploaded the FJSP_realworld files, you can download it to run the 'validation_realWorld.py' to test on bechmark instances. In particular, you can download more bechmark instances and saved models to test, and in this project I only upload one saved model and benchmark. 
