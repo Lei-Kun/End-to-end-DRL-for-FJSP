@@ -72,7 +72,7 @@ def validate(vali_set,batch_size, policy_jo,policy_mc):
 
                 j += 1
                 if env.done():
-                    plt.savefig("./3020_%s.svg"%i, format='svg',dpi=300, bbox_inches='tight')
+                    #plt.savefig("./3020_%s.svg"%i, format='svg',dpi=300, bbox_inches='tight')
                     #plt.show()
                     break
             cost = env.mchsEndTimes.max(-1).max(-1)
