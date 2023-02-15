@@ -256,19 +256,20 @@ class PPO:
             # v_loss_sum = torch.stack(v_loss_sum,0)
             self.job_optimizer.zero_grad()
             job_loss_sum.mean().backward(retain_graph=True)
-            self.job_optimizer.step()
+
             # scheduler.step()
             # Copy new weights into old policy:
             self.policy_old_job.load_state_dict(self.policy_job.state_dict())
-            if configs.decayflag:
-                self.job_scheduler.step()
-
             self.mch_optimizer.zero_grad()
             mch_loss_sum.mean().backward(retain_graph=True)
+            self.job_optimizer.step()
             self.mch_optimizer.step()
             # scheduler.step()
             # Copy new weights into old policy:
             self.policy_old_mch.load_state_dict(self.policy_mch.state_dict())
+            
+            if configs.decayflag:
+                self.job_scheduler.step()
             if configs.decayflag:
                 self.mch_scheduler.step()
 
