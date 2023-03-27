@@ -10,9 +10,7 @@
 
 You can download the "FJSP_MultiPPO" project to run 'PPOwithValue' file to train the policies, run the 'validation' file to test/validate on random generated instances.
 
-You can download the other project named 'FJSP-benchmarks' in my github account to test the trained model on real-world instances. 
-
-Anyway, is there a bigger headache than tidying up code? For open access source, please cite the work correctly if it is helpful to you!!!
+You can download the other project named 'FJSP-benchmarks' in my github account to test the trained model on real-world instances.
 
 #----------------------------------------------------------------------------------
 
